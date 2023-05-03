@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "878878860837",
+    "project_id": "find-room-5c1df",
+    "storage_bucket": "find-room-5c1df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:878878860837:android:d58a410d306c2228e681cc",
+        "android_client_info": {
+          "package_name": "com.example.flutter_room_guide"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "878878860837-ac6o5g5p8v6c2valjd7m7jgp0iitmh27.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChRswI_V6wnCl-JIAX96IzMiB60AZYDNk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "878878860837-ac6o5g5p8v6c2valjd7m7jgp0iitmh27.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "878878860837-dllkau0enlloh3m14jvpov8s92er1f49.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterRoomGuide"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
