@@ -100,7 +100,7 @@ class FindRoomScreen extends StatelessWidget {
     CollectionReference findRoom = FirebaseFirestore.instance.collection("FindRoom");
 
     return FutureBuilder(
-      future: findRoom.where("phongDi",isEqualTo: phongDi).where("phongDen", isEqualTo: phongDen).get(),
+      future: findRoom.where("phongDi", isEqualTo: phongDi).where("phongDen", isEqualTo: phongDen).get(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
 
         if (snapshot.hasError) {
@@ -112,7 +112,8 @@ class FindRoomScreen extends StatelessWidget {
         }
 
         if(snapshot.hasData && snapshot.data!.docs.isEmpty){
-          return const Center(child: Text("Không có dữ liệu"),);
+          // return const Center(child: Text("Không có dữ liệu"),);
+          return buildEmptyData();
         }
 
         return ListView(
@@ -156,58 +157,43 @@ class FindRoomScreen extends StatelessWidget {
       },
     );
   }
+
+  Widget buildEmptyData() => Container(
+    margin: const EdgeInsets.symmetric(horizontal: 15),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children:  [
+        const SizedBox(height: 25,),
+        const Text("Hướng dẫn sử dụng ứng dụng", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),),
+        const SizedBox(height: 8,),
+        const Text(
+            "Để dễ dàng tìm phòng thì cách đặt tên phòng của Trường sẽ lấy theo số lầu",
+            style: TextStyle(fontSize: 16)
+        ),
+        const SizedBox(height: 8,),
+        const Text(
+            "Phòng ở lầu 1 sẽ có số phòng là 101, 102, .... Ngoài ra ở lầu 1 còn có Trung tâm điện tử và tin học, Phòng giám đốc, các phòng thuộc các chuyên ngành.",
+            style: TextStyle(fontSize: 16)
+        ),
+        const SizedBox(height: 8,),
+        const Text(
+            "Để tìm được phòng thì bạn cần nhập vào số phòng mà bạn muốn đến, để đi đến các phòng như là trung tâm điện tử tin học thì nhập vào \"trung tâm điện tử tin học\"",
+            style: TextStyle(fontSize: 16)
+        ),
+
+        const SizedBox(height: 25,),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text("Chúc bạn học tập thật tốt!",style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18), ),
+          ],
+        ),
+      ],
+    ),
+  );
+
+
 }
 
 
 
-// class MyDialogBox extends StatefulWidget {
-//   const MyDialogBox({Key? key}) : super(key: key);
-//
-//   @override
-//   State<MyDialogBox> createState() => _MyDialogBoxState();
-// }
-//
-// class _MyDialogBoxState extends State<MyDialogBox> {
-//   @override
-//   Widget build(BuildContext context) {
-//
-//     TextEditingController phongDiController = TextEditingController();
-//     TextEditingController phongDenController = TextEditingController();
-//
-//     String soPhongDi = "", soPhongDen = "";
-//
-//     return AlertDialog(
-//       title: const Text("Bạn hãy nhập vào phòng đi và đến", style: TextStyle(
-//         fontSize: 18,
-//         fontWeight: FontWeight.w500,
-//       ),),
-//       content: Column(
-//         children: [
-//           TextField(
-//             controller: phongDiController,
-//             decoration: const InputDecoration(
-//               iconColor: Colors.blue,
-//               labelText: "Phòng đi",
-//               icon: Icon(Icons.room),
-//             ),
-//           ),
-//           TextField(
-//             controller: phongDenController,
-//             decoration: const InputDecoration(
-//               labelText: "Phòng đến",
-//               icon: Icon(Icons.door_back_door),
-//               iconColor: Colors.blue,
-//             ),
-//           ),
-//           const SizedBox(height: 5,),
-//           ElevatedButton(onPressed: (){ setState(() {
-//             soPhongDi = phongDiController.value.text;
-//             soPhongDen = phongDenController.value.text;
-//             Navigator.of(context).push(MaterialPageRoute(builder: (context) => FindRoomScreen(phongDi: soPhongDi, phongDen: soPhongDen)));
-//
-//           }); }, child: const Text("Tìm")),
-//         ],
-//       ),
-//     );
-//   }
-// }
