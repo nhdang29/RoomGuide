@@ -29,5 +29,3 @@ class User {
   }
 }
 late User currentUser;
-// User currentUser = User(mssv: "B1910362", matKhau: "000", ten: "Nguyễn Hải Đăng", lop: "DI19V7A4", cv: "Sinh viên");
-//User currentUser = User(mssv: "C12345", matKhau: "000", ten: "Nguyễn Văn A", lop: "Khoa CNTT&TT");

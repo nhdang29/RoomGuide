@@ -28,6 +28,7 @@ MaterialColor kPrimarySwatch = const MaterialColor(0xff13005A, <int, Color>{
 
 const Color kPrimaryColor = Color(0xff13005A);
 const Color kSecondaryColor = Color(0xff00337C);
+const Color kThirdColor = Color(0xff1C82AD);
 const Color kLoadingColor = Color(0xff03C988);
 const Color kDangerColor = Color(0xffEB6440);
 

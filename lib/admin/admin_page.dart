@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'guide_management.dart';
 import 'add_guide.dart';
 import 'package:flutter_room_guide/contrast.dart';
+import './model/user.dart';
 
 class AdminPage extends StatelessWidget {
 
@@ -14,7 +15,7 @@ class AdminPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Admin"),
+        title: Text("Hello ${currentUser.ten}"),
       ),
       body: const AdminScreen(),
     );

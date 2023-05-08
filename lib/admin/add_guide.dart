@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'model/find_room.dart';
 import '../contrast.dart';
+import './model/user.dart';
 
 class AddGuide extends StatelessWidget {
 
@@ -208,7 +209,7 @@ class _AddGuideScreenState extends State<AddGuideScreen> {
                       actions: [
 
                         TextButton(
-                          child: const Text('Hủy',style: TextStyle(color: kDangerColor),), // alert dialog cancel btn
+                          child: const Text('Hủy',style: TextStyle(color: kDangerColor, fontWeight: FontWeight.w600),), // alert dialog cancel btn
                           onPressed: () {
                             moTaController.clear();
                             FirebaseStorage.instance.ref().child(fr.repoName!).child(itemDuongDi.imgName!).delete();
@@ -217,7 +218,7 @@ class _AddGuideScreenState extends State<AddGuideScreen> {
                         ),
 
                         TextButton(
-                          child: const Text('Thêm', style: TextStyle(color: kPrimaryColor)), // alert dialog ok btn
+                          child: const Text('Thêm', style: TextStyle(color: kPrimaryColor, fontWeight: FontWeight.w600)), // alert dialog ok btn
                           onPressed: () {
 
                             if(moTaController.value.text.isEmpty || itemDuongDi.img == null ){
@@ -268,7 +269,7 @@ class _AddGuideScreenState extends State<AddGuideScreen> {
                   onPressed: () { // ok btn add guide screen
                     fr.phongDi = startController.value.text;
                     fr.phongDen = endController.value.text;
-                    fr.nguoiDang = "admin";
+                    fr.nguoiDang = currentUser.ten;
                     fr.duongDi = duongdi;
 
                     if(fr.phongDi!.isEmpty || fr.phongDen!.isEmpty){

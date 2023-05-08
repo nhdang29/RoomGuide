@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_room_guide/contrast.dart';
 import 'package:flutter_room_guide/models/find_room_model.dart';
 import 'package:flutter_room_guide/models/post_model.dart';
 import 'package:flutter_room_guide/screens/export_screens.dart';
@@ -33,7 +34,8 @@ class _FindRoomPageState extends State<FindRoomPage> {
                   "Nhập vào vị trí phòng đang đứng và phòng muốn đến",
                   style: TextStyle(
                     fontSize: 18,
-                    fontWeight: FontWeight.w500,
+                    color: kSecondaryColor,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
                 content: SizedBox(
@@ -43,7 +45,7 @@ class _FindRoomPageState extends State<FindRoomPage> {
                       TextField(
                         controller: fromRoomController,
                         decoration: const InputDecoration(
-                          iconColor: Colors.blue,
+                          iconColor: kSecondaryColor,
                           labelText: "Phòng đi",
                           icon: Icon(Icons.room),
                         ),
@@ -51,7 +53,7 @@ class _FindRoomPageState extends State<FindRoomPage> {
                       TextField(
                         controller: toRoomController,
                         decoration: const InputDecoration(
-                          iconColor: Colors.blue,
+                          iconColor: kSecondaryColor,
                           labelText: "Phòng đến",
                           icon: Icon(Icons.door_back_door),
                         ),
@@ -61,13 +63,13 @@ class _FindRoomPageState extends State<FindRoomPage> {
                 ),
                 actions: [
                   TextButton(
-                    child: const Text('Hủy',style: TextStyle(color: Colors.red),),
+                    child: const Text('Hủy',style: TextStyle(color: kDangerColor, fontWeight: FontWeight.w600),),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                   ),
                   TextButton(
-                    child: const Text('Tìm phòng', style: TextStyle(color: Colors.blue)),
+                    child: const Text('Tìm phòng', style: TextStyle(color: kThirdColor, fontWeight: FontWeight.w600)),
                     onPressed: () {
                       setState(() {
                         FindRoomPage.pdi = fromRoomController.value.text;
@@ -99,8 +101,30 @@ class FindRoomScreen extends StatelessWidget {
 
     CollectionReference findRoom = FirebaseFirestore.instance.collection("FindRoom");
 
+    String myFiller(String text){
+      final search = [
+        "trung tâm điện tử và tin học",
+        "căn tin sau trường",
+        "hội trường",
+        "văn phòng đoàn trường",
+        "thư viện trường"
+        "phòng giám đốc"
+      ];
+      bool isTrue = true;
+      int i = 0;
+      while(isTrue && i < search.length){
+        if(search[i].contains(text)){
+          text = search[i];
+          isTrue = false;
+        } else{
+          i++;
+        }
+      }
+      return text;
+    }
+
     return FutureBuilder(
-      future: findRoom.where("phongDi", isEqualTo: phongDi).where("phongDen", isEqualTo: phongDen).get(),
+      future: findRoom.where("phongDi", isEqualTo: myFiller(phongDi.toLowerCase())).where("phongDen", isEqualTo: myFiller(phongDen.toLowerCase())).get(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
 
         if (snapshot.hasError) {
@@ -112,7 +136,6 @@ class FindRoomScreen extends StatelessWidget {
         }
 
         if(snapshot.hasData && snapshot.data!.docs.isEmpty){
-          // return const Center(child: Text("Không có dữ liệu"),);
           return buildEmptyData();
         }
 
